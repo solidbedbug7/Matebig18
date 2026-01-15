@@ -1,0 +1,501 @@
+*{
+  box-sizing: border-box;
+}
+.hidden { display: none !important; }
+
+body {
+  cursor: url("cursor.png"), auto;
+}
+body {
+  cursor: auto;
+}
+
+body.trial-mode {
+  cursor: url("cursor.png") 16 16, none;
+}
+
+/* =========================
+   DR BLOOD SPLATTER LAYER
+   ========================= */
+
+#blood-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* behind everything */
+  overflow: hidden;
+}
+
+.blood {
+  position: absolute;
+  opacity: 0.85;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+  animation: floatBlood 18s linear infinite alternate;
+}
+
+@keyframes floatBlood {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-30px) rotate(8deg); }
+}
+body{
+  margin: 0;
+  font-family: 'VT323', monospace;
+  background: rgb(0, 0, 0); /* pink base */
+  color: white;
+  position: relative;
+}
+
+/* normal: slight dark overlay for DR vibe */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.22);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ✅ trial mode: FULL DARK */
+body.trial-mode{
+  background: #050505;
+}
+
+body.trial-mode::before{
+  background: rgba(0,0,0,0.65);
+}
+
+
+/* cursor on clickable things */
+button, a, .gambit-letter{
+  cursor: url("cursor.png") 16 16, pointer;
+}
+
+/* =========================
+   PEEKING CHARACTERS
+   ========================= */
+.peek{
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+  filter: drop-shadow(0 14px 26px rgba(0,0,0,0.28));
+}
+
+.peek.hajime{
+  width: clamp(260px, 26vw, 420px);
+  top: 70px;
+  left: -190px;
+  transform: rotate(37deg);
+}
+
+.peek.nagito{
+  width: clamp(360px, 36vw, 580px);
+  bottom: -50px;
+  left: -260px;
+  transform: rotate(8deg);
+}
+
+.peek.junko{
+  width: clamp(360px, 36vw, 580px);
+  top: 45%;
+  right: -280px;
+  transform: translateY(-50%) rotate(-40deg);
+}
+
+@media (max-width: 600px){
+  .peek.hajime{ width: 220px; left: -170px; }
+  .peek.nagito{ width: 280px; left: -220px; bottom: -100px; }
+  .peek.junko{ width: 280px; right: -220px; }
+}
+
+/* =========================
+   STARTUP SCREEN
+   ========================= */
+#startup{
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOut 2s ease forwards;
+  animation-delay: 6s;
+}
+
+#startup img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes fadeOut{
+  to{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+.hidden{ display: none; }
+.hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* extra characters near the title */
+.hero-char {
+  position: absolute;
+  width: clamp(90px, 12vw, 160px);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+
+.hero-char.left {
+  left: 20%;
+  transform: translateY(-50%) rotate(-6deg);
+}
+
+
+.hero-char.right {
+  right: 20%;
+  transform: translateY(-50%) rotate(6deg);
+}
+body.trial-mode .peek,
+body.trial-mode .hero-char{
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.6))
+          drop-shadow(0 0 14px rgba(255,255,255,0.18));
+}
+
+.hero{
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1{
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  background: white;
+  color: black;
+  padding: 30px 60px;
+  border-radius: 24px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero p{
+  font-size: clamp(3.2rem, 5vw, 4rem);
+  margin-top: 16px;
+}
+
+@keyframes float{
+  0%{ transform: translateY(0); }
+  50%{ transform: translateY(-8px); }
+  100%{ transform: translateY(0); }
+}
+
+/* Optional gif styling */
+.hero-gif{
+  width: 180px;
+  margin-top: 20px;
+  image-rendering: pixelated;
+  
+}
+/* =========================
+   MEMORIES SECTION (BIG)
+   ========================= */
+
+.memories {
+  padding: 70px 20px 40px;
+  text-align: center;
+}
+
+.memories h2 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  margin-bottom: 28px;
+}
+
+/* ALWAYS 2 PER ROW */
+.memories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.memories-grid img {
+  width: 100%;
+  height: 260px;          /* BIGGER */
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.3);
+  transform: rotate(-1.2deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* cute hover */
+.memories-grid img:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.4);
+}
+
+/* mobile: still 2 per row but slightly smaller */
+@media (max-width: 600px){
+  .memories-grid img {
+    height: 200px;
+  }
+}
+
+/* =========================
+   MESSAGE SECTION
+   ========================= */
+.message{
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.big{
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+footer{
+  padding: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+/* =========================
+   POEM STYLE MESSAGE
+   ========================= */
+
+.message.poem {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.message.poem h2 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  margin-bottom: 30px;
+}
+
+.poem-text {
+  max-width: 820px;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 40px;
+  opacity: 0.95;
+}
+
+.message.poem .big {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  letter-spacing: 3px;
+}
+
+/* =========================
+   HANGMAN'S GAMBIT MINIGAME
+   ========================= */
+.gambit{
+  padding: 70px 20px;
+  text-align: center;
+}
+
+
+.gambit-title{
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.gambit-sub{
+  opacity: 0.9;
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+
+.gambit-stage{
+  position: relative;
+  max-width: 980px;
+  height: 520px;
+  margin: 18px auto 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.35);
+}
+
+/* ✅ background image ONLY for minigame */
+.gambit-bg{
+  position: absolute;
+  inset: 0;
+  background: url("hangman.png") center / cover no-repeat;
+  z-index: 1;
+}
+
+/* put everything above bg */
+.gambit-sprite,
+.gambit-topbar,
+.slot-row,
+.gambit-arena,
+.gambit-controls,
+.gambit-start{
+  position: absolute;
+  z-index: 2;
+}
+
+/* sprite */
+.gambit-sprite{
+  left: 42%;
+  top: 12%;
+  width: clamp(180px, 22vw, 320px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35));
+}
+
+/* top bar */
+.gambit-topbar{
+  top: 16px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.45);
+}
+
+/* slots */
+.slot-row{
+  left: 18px;
+  right: 18px;
+  bottom: 130px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.slot{
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.55);
+  border: 2px solid rgba(255,255,255,0.45);
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
+}
+
+/* arena */
+.gambit-arena{
+  inset: 0;
+}
+
+/* letter tiles */
+.gambit-letter{
+  position: absolute;
+  top: -60px;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  background: rgba(0,0,0,0.55);
+  border: 2px solid rgba(255,255,255,0.35);
+  user-select: none;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.55);
+}
+
+.gambit-letter:hover{
+  transform: scale(1.06);
+}
+
+/* controls */
+.gambit-controls{
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.45);
+}
+
+.gambit-btn{
+  font-family: 'VT323', monospace;
+  font-size: 1.4rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.18);
+  color: white;
+}
+
+/* START button overlay */
+.gambit-start{
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'VT323', monospace;
+  font-size: 2.4rem;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: 3px solid rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.60);
+  color: white;
+}
+
+.gambit-start.hidden{
+  display: none;
+}
+/* background should NEVER catch clicks */
+.gambit-bg{
+  pointer-events: none;
+}
+
+/* arena also should not block the START button */
+.gambit-arena{
+  pointer-events: none;
+}
+
+/* BUT falling letters must still be clickable */
+.gambit-letter{
+  pointer-events: auto;
+}
+
+/* make sure start button is ABOVE everything */
+.gambit-start{
+  z-index: 9999;
+  pointer-events: auto;
+}
+.win-overlay{
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win-video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.win-overlay{ cursor: pointer; }

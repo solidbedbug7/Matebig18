@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mate synttäri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<div id="blood-layer"></div>
+
+
+<body>
+  <!-- PEEKING CHARACTERS -->
+  <img class="peek hajime" src="hajime.png" alt="">
+  <img class="peek nagito" src="nagito.png" alt="">
+  <img class="peek junko" src="junko.png" alt="">
+
+  <!-- STARTUP SCREEN -->
+  <div id="startup">
+    <img src="mate1.jpg" alt="Welcome Mate">
+  </div>
+
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bg-music" src="danganronpa.mp3" loop preload="auto"></audio>
+
+  <!-- WIN VIDEO OVERLAY (shows on win) -->
+  <div id="winOverlay" class="win-overlay hidden">
+  <video id="winVideo" class="win-video" playsinline preload="auto">
+    <source src="mvideo.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+  <!-- MAIN CONTENT -->
+  <main id="content" class="hidden">
+    <section class="hero">
+  <img src="eren.png" class="hero-char left" alt="">
+  
+  <h1>MOII RAKAS MATE :3</h1>
+
+  <img src="reiner.png" class="hero-char right" alt="">
+
+  <img src="gif.webp" class="hero-gif" alt="">
+  <p>Onnea onnea olet vihdoin 18 VEE !</p>
+</section>
+
+
+    <!-- MINI GAME -->
+    <section class="gambit">
+      <h2 class="gambit-title">Hangmans Gambit</h2>
+      <p class="gambit-sub">Can you guess the word :3? (hint: how old are you now!)</p>
+
+      <div class="gambit-stage">
+        <!-- background image layer (CSS controls this) -->
+        <div class="gambit-bg"></div>
+
+        <!-- start button -->
+        <button id="gambitStart" class="gambit-start" type="button">START!</button>
+
+        <div class="gambit-topbar">
+          <span>Letters Left</span>
+          <span id="lettersLeft">0</span>
+        </div>
+
+        <!-- boxes -->
+        <div id="slotRow" class="slot-row"></div>
+
+        <!-- falling letters -->
+        <div id="gambitArena" class="gambit-arena"></div>
+
+        <div class="gambit-controls">
+          <span>Misses: <span id="gambitMisses">0</span>/5</span>
+          <button id="gambitRestart" class="gambit-btn" type="button">Restart?</button>
+        </div>
+      </div>
+    </section>
+
+   <section class="message poem">
+  <h2>I love u mate</h2>
+
+  <p class="poem-text">
+    I luvvvv you very much!! <br>
+    Oot yks mun tosi <strong>TÄRKEISTÄ</strong> frendeistä, legit my bff!! <br><br>
+
+    Toivottavasti pidät kivan synttärin (heh heh) <br>
+    ja toivottavasti tykkäät tästä pienestä yllätyksestä <br>
+    mitä tein sulle :3
+  </p>
+
+  <p class="big">HAPPY BDAY!</p>
+</section>
+
+<section class="memories">
+  <h2>US!</h2>
+
+  <div class="memories-grid">
+    <img src="pic1.jpg" alt="">
+    <img src="pic2.png" alt="">
+    <img src="pic3.jpg" alt="">
+    <img src="pic4.jpg" alt="">
+    <img src="pic5.jpg" alt="">
+    <img src="pic6.png" alt="">
+    <img src="pic7.jpg" alt="">
+    <img src="pic8.png" alt="">
+  </div>
+</section>
+
+  </div>
+</section>
+
+    <footer>
+      💖:Isla
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
