@@ -85,40 +85,28 @@ window.addEventListener("DOMContentLoaded", () => {
         music.play().catch(() => {});
       }
     });
-  }
-
   async function playWinVideoFullscreen() {
-    if (!WIN_OVERLAY || !WIN_VIDEO) return;
+  if (!WIN_OVERLAY || !WIN_VIDEO) return;
 
-    // Pause background music while video plays
-    if (music && musicStarted && !music.paused) music.pause();
+  // Pause background music while video plays
+  if (music && musicStarted && !music.paused) music.pause();
 
-    WIN_OVERLAY.classList.remove("hidden");
-    WIN_VIDEO.currentTime = 0;
+  // Show overlay
+  WIN_OVERLAY.classList.remove("hidden");
 
-    let played = false;
-    try {
-      await WIN_VIDEO.play();
-      played = true;
-    } catch (e) {
-      // If autoplay blocks, user can click the overlay/video
-    }
+  // Fullscreen the overlay
+  try { await WIN_OVERLAY.requestFullscreen(); } catch(e) {}
 
-    // Fullscreen only if it actually started
-    if (played) {
-      try { await WIN_OVERLAY.requestFullscreen(); } catch (e) {}
-    }
+  // Click anywhere to exit fullscreen and resume music
+  WIN_OVERLAY.addEventListener("click", async () => {
+    try { await document.exitFullscreen(); } catch(e) {}
+    WIN_OVERLAY.classList.add("hidden");
 
-    WIN_VIDEO.onended = async () => {
-      try { await document.exitFullscreen(); } catch (e) {}
-      WIN_OVERLAY.classList.add("hidden");
+    // Resume site music
+    if (music && musicStarted) music.play().catch(() => {});
+  }, { once: true });
+}
 
-      // Resume site music after video ends
-      if (music && musicStarted) {
-        music.play().catch(() => {});
-      }
-    };
-  }
 
   function buildSlots() {
     SLOT_ROW.innerHTML = "";
